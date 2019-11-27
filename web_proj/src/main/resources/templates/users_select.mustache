@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Test... </title>
+</head>
+<body>
+<h2>Add new user</h2>
+
+<div>
+    <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+{{#users}}
+
+{{id}}
+
+{{#name}}
+{{name}}
+{{/name}}
+
+{{#last_name}}
+{{last_name}}
+{{/last_name}}
+
+{{username}}
+{{password}}
+<br>
+{{/users}}
+</body>
+</html>
