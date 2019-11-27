@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Controller
-public class GreetingController {
+public class MainController {
 
     @Autowired
     private UsersRepo usersRepo;
@@ -34,13 +34,34 @@ public class GreetingController {
         return "users";
     }
 
-    @PostMapping
-    public String add(@RequestParam String name,
-                      @RequestParam String last_name,
-                      @RequestParam String login,
-                      @RequestParam String password, Map<String, Object> model) {
+    @PostMapping("/add")
+    public String add(@RequestParam String name, @RequestParam String last_name,
+                         @RequestParam String login, @RequestParam String password, Map<String, Object> model) {
+
         MyUser myUser = new MyUser(name, last_name, login, password);
         usersRepo.save(myUser);
+
+        Iterable<MyUser> users = usersRepo.findAll();
+
+        model.put("users", users);
+
+        return "users";
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam String name, @RequestParam String last_name,
+                      @RequestParam String login, @RequestParam String password,
+                      @RequestParam String submit, @RequestParam String id, Map<String, Object> model) {
+         if (submit.equals("Изменить")) {
+            MyUser user = usersRepo.findById(new Integer(id)).get(0);
+            user.setName(name);
+            user.setLast_name(last_name);
+            user.setLogin(login);
+            user.setPassword(password);
+            usersRepo.save(user);
+        } else if (submit.equals("Удалить")) {
+            usersRepo.delete(usersRepo.findById(new Integer(id)).get(0));
+        }
 
         Iterable<MyUser> users = usersRepo.findAll();
 
