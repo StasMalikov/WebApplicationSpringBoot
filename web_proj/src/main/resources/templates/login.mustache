@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<!DOCTYPE HTML>
+<html lang="ru">
+
 <head>
-    <title>Spring Security Example </title>
+    <meta charset="utf-8">
+    <title>Testing...</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
-<h2>Login page</h2>
-<form action="/login" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-<a href="/registration">Add new user</a>
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-md-4'>
+        </div>
+        <div class='col-md-4'>
+
+            <form action="/login" method="post">
+                <h1 class="h3 mb-3 font-weight-normal">Авторизация</h1>
+                <div class="form-group">
+                    <input name="username" class="form-control"  type="text" aria-describedby="emailHelp" placeholder="Логин">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Пароль">
+                </div>
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                <div><input class="btn btn-primary" type="submit" value="Sign In"/>
+                    <a href="/registration" class="btn btn-primary" role="button" aria-pressed="true">Registration</a></div>
+            </form>
+
+        </div>
+        <div class='col-md-4'>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+
 </html>
