@@ -34,39 +34,35 @@ public class RegistrationController {
        User userFromDb =  userRepo.findByUsername(user.getUsername());
        if(userFromDb != null) {
             model.put("message", "Такой пользователь уже существует!");
+           Iterable<User> users = userRepo.findAll();
+           model.put("users", users);
             return "registration";
        }
        user.setActive(true);
        user.setRoles(Collections.singleton(Role.USER));
        userRepo.save(user);
-
-       return "redirect:/login";
+       return "redirect:/";
     }
 
-
-
     @PostMapping("/add_user")
-    public String add(@RequestParam String name, @RequestParam String last_name,
-                      @RequestParam String username, @RequestParam String password, Map<String, Object> model) {
+    public String add(User user, Map<String, Object> model) {
 
-        User userFromDb =  userRepo.findByUsername(username);
+        User userFromDb =  userRepo.findByUsername(user.getUsername());
         if(userFromDb != null) {
             model.put("message", "Такой пользователь уже существует!");
-            return "registration";
+            Iterable<User> users = userRepo.findAll();
+            model.put("users", users);
+
+            return "users_select";
         }
-        User u = new User();
-        u.setName(name);
-        u.setLast_name(last_name);
-        u.setPassword(password);
-        u.setUsername(username);
-        u.setActive(false);
-        u.setRoles(Collections.singleton(Role.USER));
-        userRepo.save(u);
+        user.setActive(false);
+        user.setRoles(Collections.singleton(Role.USER));
+        userRepo.save(user);
 
         Iterable<User> users = userRepo.findAll();
 
-        model.put("usr", users);
+        model.put("users", users);
 
-        return "usr";
+        return "users_select";
     }
 }
