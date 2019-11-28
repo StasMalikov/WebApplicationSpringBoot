@@ -41,7 +41,7 @@
 
         {{#users}}
         <tr>
-            <form method="post" action="/delete">
+            <form method="post" action="/edit">
                 <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                 <th><input type="text" name="id"  placeholder="id" value="{{id}}" readonly></th>
                 <td><input type="text" name="name"  placeholder="Имя" value="{{#name}}{{name}}{{/name}}"></td>

@@ -60,9 +60,20 @@ public class RegistrationController {
         userRepo.save(user);
 
         Iterable<User> users = userRepo.findAll();
-
         model.put("users", users);
+        return "users_select";
+    }
 
+    @PostMapping("/edit")
+    public String edit(User user, @RequestParam String submit, Map<String, Object> model) {
+        if (submit.equals("Изменить")) {
+            userRepo.save(user);
+
+        } else if (submit.equals("Удалить")) {
+            userRepo.delete(user);
+        }
+        Iterable<User> users = userRepo.findAll();
+        model.put("users", users);
         return "users_select";
     }
 }
