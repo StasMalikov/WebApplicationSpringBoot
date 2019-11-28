@@ -1,6 +1,5 @@
 package com.example.sweater.controller;
 
-import com.example.sweater.domain.MyUser;
 import com.example.sweater.domain.Role;
 import com.example.sweater.domain.User;
 import com.example.sweater.repos.UserRepo;
@@ -25,13 +24,6 @@ public class RegistrationController {
 
     @GetMapping("/users_select")
     public String users_select(Map<String, Object> model) {
-        Iterable<User> users = userRepo.findAll();
-        model.put("users", users);
-        return "users_select";
-    }
-
-    @GetMapping("/test")
-    public String test(Map<String, Object> model) {
         Iterable<User> users = userRepo.findAll();
         model.put("users", users);
         return "users_select";
