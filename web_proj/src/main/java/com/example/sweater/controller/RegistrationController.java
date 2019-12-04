@@ -3,6 +3,7 @@ package com.example.sweater.controller;
 import com.example.sweater.domain.Post;
 import com.example.sweater.domain.Role;
 import com.example.sweater.domain.User;
+import com.example.sweater.repos.PostRepo;
 import com.example.sweater.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,29 @@ import java.util.Map;
 public class RegistrationController {
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private PostRepo postRepo;
+
+
+
+    @GetMapping("/get_posts")
+    public String get_posts(Map<String, Object> model) {
+    Iterable<Post> posts = postRepo.findAll();
+        model.put("posts", posts);
+        return "posts";
+    }
+
+    @GetMapping("/save_posts")
+    public String save_posts(Map<String, Object> model) {
+        final RestTemplate restTemplate = new RestTemplate();
+        final Post[] posts = restTemplate.getForObject("http://jsonplaceholder.typicode.com/posts?_limit=10", Post[].class);
+        for(Post i : posts) {
+            postRepo.save(i);
+        }
+        model.put("posts", posts);
+        return "posts";
+    }
 
     @GetMapping("/posts")
     public String posts(Map<String, Object> model) {

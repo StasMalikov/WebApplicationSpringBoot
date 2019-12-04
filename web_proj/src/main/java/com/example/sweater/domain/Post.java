@@ -1,7 +1,12 @@
 package com.example.sweater.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Post {
 
+    @Id
     private int id;
     private String title;
     private String body;
