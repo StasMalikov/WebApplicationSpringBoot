@@ -1,5 +1,6 @@
 package com.example.sweater.controller;
 
+import com.example.sweater.domain.Post;
 import com.example.sweater.domain.Role;
 import com.example.sweater.domain.User;
 import com.example.sweater.repos.UserRepo;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 import java.util.Map;
@@ -16,6 +19,15 @@ import java.util.Map;
 public class RegistrationController {
     @Autowired
     private UserRepo userRepo;
+
+    @GetMapping("/posts")
+    public String posts(Map<String, Object> model) {
+        final RestTemplate restTemplate = new RestTemplate();
+        final Post[] posts = restTemplate.getForObject("http://jsonplaceholder.typicode.com/posts?_limit=10", Post[].class);
+
+        model.put("posts", posts);
+        return "posts";
+    }
 
     @GetMapping("/registration")
     public String registration() {
