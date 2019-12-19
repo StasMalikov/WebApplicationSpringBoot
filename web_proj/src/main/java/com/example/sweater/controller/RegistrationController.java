@@ -36,7 +36,7 @@ public class RegistrationController {
     @GetMapping("/save_posts")
     public String save_posts(Map<String, Object> model) {
         final RestTemplate restTemplate = new RestTemplate();
-        final Post[] posts = restTemplate.getForObject("http://jsonplaceholder.typicode.com/posts?_limit=10", Post[].class);
+        final Post[] posts = restTemplate.getForObject("http://jsonplaceholder.typicode.com/posts?_limit=30", Post[].class);
         for(Post i : posts) {
             postRepo.save(i);
         }
